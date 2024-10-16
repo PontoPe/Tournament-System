@@ -11,3 +11,6 @@ public class Main {
         // Create 4 groups
         for (int i = 0; i < 4; i++) {
             Group group = new Group();
+        }
+    }
+}
