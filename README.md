@@ -4,9 +4,9 @@ Bem-vindo ao sistema de torneio para CS2/Valorant! Este projeto foi criado para 
 
 ## 📋 **Sumário**
 
-- [Sobre o Projeto](#sobre-o-projeto)
-- [Funcionalidades](#funcionalidades)
-- [Como Usar](#como-usar)
+- [Sobre o Projeto](#-sobre-o-projeto)
+- [Funcionalidades](#-funcionalidades)
+- [Como Usar](#-como-usar)
 
 ---
 
