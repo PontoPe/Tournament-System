@@ -4,6 +4,7 @@ public class Team {
     private String name;
     private ArrayList<Player> players;
     private Coach coach;
+    private int roundDiff;
 
     public Team(String name, Player player1, Player player2, Player player3, Player player4, Player player5, Coach coach) {
         this.name = name;
@@ -25,5 +26,13 @@ public class Team {
 
     public String getName() {
         return name;
+    }
+
+    public int getRoundDiff() {
+        return roundDiff;
+    }
+
+    public void setRoundDiff(int roundDiff) {
+        this.roundDiff = roundDiff;
     }
 }
