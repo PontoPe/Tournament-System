@@ -5,15 +5,21 @@ public class Team {
     private ArrayList<Player> players;
     private Coach coach;
     private int roundDiff;
+    private int roundsWon;
+    private int roundsLost;
+    private int roundsWonGame;
 
     public Team(String name, Player player1, Player player2, Player player3, Player player4, Player player5, Coach coach) {
         this.name = name;
+        this.players = new ArrayList<>();
         this.players.add(player1);
         this.players.add(player2);
         this.players.add(player3);
         this.players.add(player4);
         this.players.add(player5);
         this.coach = coach;
+        this.roundDiff = 0;
+        this.roundsWon = 0;
     }
 
     public ArrayList<Player> getPlayers() {
@@ -29,10 +35,38 @@ public class Team {
     }
 
     public int getRoundDiff() {
-        return roundDiff;
+        return roundsWon - roundsLost;
     }
 
     public void setRoundDiff(int roundDiff) {
         this.roundDiff = roundDiff;
+    }
+
+    public int getRoundsWon() {
+        return roundsWon;
+    }
+
+    public void winRound() {
+        this.roundsWon++;
+    }
+
+    public int getRoundsLost() {
+        return roundsLost;
+    }
+
+    public void loseRound() {
+        this.roundsLost++;
+    }
+
+    public int getRoundsWonGame() {
+        return roundsWonGame;
+    }
+
+    public void winRoundGame() {
+        this.roundsWonGame++;
+    }
+
+    public void resetRoundsWonGame() {
+        this.roundsWonGame = 0;
     }
 }
