@@ -2,17 +2,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Group {
+    private String name;
     private List<Team> teams;
 
-    public Group() {
-        teams = new ArrayList<>();
+    public Group(String name) {
+        this.name = name;
+        this.teams = new ArrayList<>();
     }
 
-    public void addTeam(Team team) {
-        teams.add(team);
+    public String getName() {
+        return name;
     }
 
     public List<Team> getTeams() {
         return teams;
+    }
+
+    public void addTeam(Team team) {
+        this.teams.add(team);
     }
 }
