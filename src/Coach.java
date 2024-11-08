@@ -1,16 +1,10 @@
-public class Coach {
-    private String name;
-    private int age;
-
-    public int getAge() {
-        return age;
-    }
-
+public class Coach extends Participant {
     public Coach(String name) {
-        this.name = name;
+        super(name);
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public void performAction() {
+        System.out.println("Coach " + getName() + " asked for pause");
     }
 }

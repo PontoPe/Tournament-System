@@ -23,6 +23,9 @@ public class Game {
         int team1Kills = 0;
         int team2Kills = 0;
 
+        Participant randomParticipant = random.nextBoolean() ? getRandomPlayer(team1) : team1.getCoach();
+        randomParticipant.performAction();
+
         while (team1Kills < 5 && team2Kills < 5) {
             Player killer = random.nextBoolean() ? getRandomPlayer(team1) : getRandomPlayer(team2);
             Player victim = killer == getRandomPlayer(team1) ? getRandomPlayer(team2) : getRandomPlayer(team1);

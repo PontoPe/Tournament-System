@@ -8,6 +8,7 @@ public class Team {
     private int roundsWon;
     private int roundsLost;
     private int roundsWonGame;
+    private ArrayList<Sponsor> sponsors;
 
     public Team(String name, Player player1, Player player2, Player player3, Player player4, Player player5, Coach coach) {
         this.name = name;
@@ -20,6 +21,7 @@ public class Team {
         this.coach = coach;
         this.roundDiff = 0;
         this.roundsWon = 0;
+        this.sponsors = new ArrayList<>();
     }
 
     public ArrayList<Player> getPlayers() {
@@ -68,5 +70,13 @@ public class Team {
 
     public void resetRoundsWonGame() {
         this.roundsWonGame = 0;
+    }
+
+    public ArrayList<Sponsor> getSponsors() {
+        return sponsors;
+    }
+
+    public void addSponsor(Sponsor sponsor) {
+        this.sponsors.add(sponsor);
     }
 }
