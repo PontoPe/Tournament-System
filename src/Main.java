@@ -40,7 +40,9 @@ public class Main {
             "Marta", "Neide", "Odila", "Paloma", "Quitéria", "Rita", "Silvia", "Tereza", "Ursula", "Vânia",
             "Wanda", "Ximena", "Yara", "Zélia", "Amanda", "Brenda", "Cátia", "Dulce", "Evelyn", "Fabiana",
             "Gisele", "Helena", "Irene", "Júlia", "Kátia", "Lúcia", "Mara", "Nádia", "Olga", "Patrícia",
-            "Quésia", "Rafaela", "Sabrina", "Tatiana", "Ursula", "Valéria", "Wanda", "Ximena", "Yasmin", "Zilda", "Ana", "Beatriz", "Camila", "Daniela", "Eduarda", "Fernanda", "Gabriela", "Helena", "Isabela", "Juliana", "Karina", "Larissa", "Mariana", "Natália", "Olivia", "Patrícia", "Marina de Lara", "Rafaela"
+            "Quésia", "Rafaela", "Sabrina", "Tatiana", "Ursula", "Valéria", "Wanda", "Ximena", "Yasmin",
+            "Zilda", "Ana", "Beatriz", "Camila", "Daniela", "Eduarda", "Fernanda", "Gabriela", "Helena",
+            "Isabela", "Juliana", "Karina", "Larissa", "Mariana", "Natália", "Olivia", "Patrícia", "Marina de Lara", "Rafaela"
         );
         return names;
     }
