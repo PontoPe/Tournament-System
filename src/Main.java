@@ -1,69 +1,115 @@
+import java.awt.*;
+import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import javax.swing.*;
 
 public class Main {
-    public static void main(String[] args) {
-        List<String> names = generateNames();
-        System.out.println("names.size()=" + names.size());
-        List<Group> groups = createGroups(names);
+    private static final String FILE_NAME = "./src/player_names.txt";
 
-        // Print groups, teams, and their members
-        for (Group group : groups) {
-            System.out.println("Group: " + group.getName());
-            for (Team team : group.getTeams()) {
-                System.out.println("  Team: " + team.getName());
-                System.out.println("    Coach: " + team.getCoach().getName());
-                System.out.println("-");
-                for (Player player : team.getPlayers()) {
-                    System.out.println("    Player: " + player.getName());
-                }
-                System.out.println("-----------------");
-            }
-            System.out.println("===================================");
+    public static void main(String[] args) {
+        List<String> names = loadNamesFromFile(FILE_NAME);
+        printNames(names);
+        promptForPlayerName(names, FILE_NAME);
+
+        try {
+            List<Group> groups = createGroups(names);
+
+            // Create and display the GUI
+            SwingUtilities.invokeLater(() -> {
+                MainFrame mainFrame = new MainFrame(groups);
+                mainFrame.setVisible(true);
+
+                // Example of initializing gameFrame and calling appendColoredText
+                GameFrame gameFrame = new GameFrame(groups.get(0).getTeams().get(0), groups.get(0).getTeams().get(1));
+                gameFrame.appendColoredText("Game started!", Color.GREEN, 14);
+            });
+        } catch (NotEnoughNamesException e) {
+            System.err.println(e.getMessage());
         }
     }
 
-    private static List<String> generateNames() {
+    private static void printNames(List<String> names) {
+        for (int i = 0; i < names.size(); i++) {
+            System.out.println((i + 1) + ". " + names.get(i));
+        }
+    }
+
+    private static void promptForPlayerName(List<String> names, String fileName) {
+        String playerName = JOptionPane.showInputDialog(null, "Do you want to add a player's name? If yes, enter the name:");
+        if (playerName != null && !playerName.trim().isEmpty()) {
+            names.add(playerName.trim());
+            saveNameToFile(playerName.trim(), fileName);
+        }
+    }
+
+    private static void saveNameToFile(String name, String fileName) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true))) {
+            writer.write(name);
+            writer.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static List<String> loadNamesFromFile(String fileName) {
         List<String> names = new ArrayList<>();
-        Collections.addAll(names,
-            "Ana", "Beatriz", "Camila", "Daniela", "Eduarda", "Fernanda", "Gabriela", "Helena", "Isabela", "Juliana",
-            "Karina", "Larissa", "Mariana", "Natália", "Olivia", "Patrícia", "Quésia", "Rafaela", "Sabrina", "Tatiana",
-            "Ursula", "Valentina", "Wendy", "Ximena", "Yasmin", "Zilda", "Adriana", "Bruna", "Carla", "Débora",
-            "Eliana", "Fabiana", "Giovana", "Heloísa", "Ivana", "Jéssica", "Kátia", "Lúcia", "Mônica", "Nina",
-            "Ofélia", "Paula", "Quitéria", "Renata", "Sandra", "Teresa", "Úrsula", "Vera", "Wanda", "Xuxa",
-            "Yara", "Zuleica", "Alessandra", "Bianca", "Cecília", "Diana", "Elisa", "Flávia", "Glória", "Hilda",
-            "Inês", "Joana", "Kelly", "Lara", "Márcia", "Nair", "Odete", "Priscila", "Quintina", "Regina",
-            "Sônia", "Tânia", "Ulda", "Vânia", "Wilma", "Xênia", "Yolanda", "Zoraide", "Aline", "Bárbara",
-            "Cláudia", "Denise", "Ester", "Fátima", "Graça", "Heloísa", "Iara", "Janaína", "Karla", "Lívia",
-            "Marta", "Neide", "Odila", "Paloma", "Quitéria", "Rita", "Silvia", "Tereza", "Ursula", "Vânia",
-            "Wanda", "Ximena", "Yara", "Zélia", "Amanda", "Brenda", "Cátia", "Dulce", "Evelyn", "Fabiana",
-            "Gisele", "Helena", "Irene", "Júlia", "Kátia", "Lúcia", "Mara", "Nádia", "Olga", "Patrícia",
-            "Quésia", "Rafaela", "Sabrina", "Tatiana", "Ursula", "Valéria", "Wanda", "Ximena", "Yasmin",
-            "Zilda", "Ana", "Beatriz", "Camila", "Daniela", "Eduarda", "Fernanda", "Gabriela", "Helena",
-            "Isabela", "Juliana", "Karina", "Larissa", "Mariana", "Natália", "Olivia", "Patrícia", "Marina de Lara", "Rafaela"
-        );
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (!line.trim().isEmpty()) {
+                    names.add(line.trim());
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return names;
     }
 
-    private static List<Group> createGroups(List<String> names) {
+    private static List<Group> createGroups(List<String> names) throws NotEnoughNamesException{
+        if (names.size() < 4 * 6 * 5 + 4 * 6) {
+            throw new NotEnoughNamesException("Not enough names to create teams and coaches.");
+        }
+
         List<Group> groups = new ArrayList<>();
         Random random = new Random();
+        int teamCounter = 1;
 
         // Create 4 groups
         for (int i = 0; i < 4; i++) {
             Group group = new Group("Group " + (i + 1));
+            List<Team> teams = new ArrayList<>();
             for (int j = 0; j < 6; j++) {
-                String teamName = "Team " + (i * 6 + j + 1);
+                String teamName = "Team " + teamCounter++;
                 Coach coach = new Coach(names.remove(random.nextInt(names.size())));
                 List<Player> players = new ArrayList<>();
                 for (int k = 0; k < 5; k++) {
-                    players.add(new Player(names.remove(random.nextInt(names.size()))));
+                    Player player = new Player(names.remove(random.nextInt(names.size())));
+                    players.add(player);
                 }
                 Team team = new Team(teamName, players.get(0), players.get(1), players.get(2), players.get(3), players.get(4), coach);
+                for (Player player : players) {
+                    player.setTeam(team);
+                }
+                teams.add(team);
                 group.addTeam(team);
             }
+
+            // Create games for each pair of teams in the group
+            for (int t1 = 0; t1 < teams.size(); t1++) {
+                for (int t2 = t1 + 1; t2 < teams.size(); t2++) {
+                    Team team1 = teams.get(t1);
+                    Team team2 = teams.get(t2);
+                    GameFrame gameFrame = new GameFrame(team1, team2);
+                    Game game = new Game(team1, team2, gameFrame);
+                    team1.setGame(game);
+                    team2.setGame(game);
+                    group.addGame(game); // Add game to the group's games list
+                }
+            }
+
             groups.add(group);
         }
 

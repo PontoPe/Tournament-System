@@ -9,6 +9,9 @@ public class Team {
     private int roundsLost;
     private int roundsWonGame;
     private ArrayList<Sponsor> sponsors;
+    private Game currentGame;
+    private int points;
+    private int gamesPlayed;
 
     public Team(String name, Player player1, Player player2, Player player3, Player player4, Player player5, Coach coach) {
         this.name = name;
@@ -22,6 +25,16 @@ public class Team {
         this.roundDiff = 0;
         this.roundsWon = 0;
         this.sponsors = new ArrayList<>();
+        this.points = 0;
+        this.gamesPlayed = 0;
+    }
+
+    public void resetPoints() {
+        this.points = 0;
+    }
+
+    public void resetGamesPlayed() {
+        this.gamesPlayed = 0;
     }
 
     public ArrayList<Player> getPlayers() {
@@ -32,8 +45,32 @@ public class Team {
         return coach;
     }
 
+    public void addGamePlayed() {
+        this.gamesPlayed++;
+    }
+
+    public int getGamesPlayed() {
+        return gamesPlayed;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setGame(Game currentGame) {
+        this.currentGame = currentGame;
+    }
+
+    public Game getGame() {
+        return currentGame;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void addPoints(int points) {
+        this.points += points;
     }
 
     public int getRoundDiff() {
@@ -78,5 +115,10 @@ public class Team {
 
     public void addSponsor(Sponsor sponsor) {
         this.sponsors.add(sponsor);
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }
