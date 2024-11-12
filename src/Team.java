@@ -79,4 +79,9 @@ public class Team {
     public void addSponsor(Sponsor sponsor) {
         this.sponsors.add(sponsor);
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

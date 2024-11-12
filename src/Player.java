@@ -1,6 +1,8 @@
-public class Player extends Participant{
+// src/Player.java
+public class Player extends Participant {
     private int kills;
     private int deaths;
+    private Team team;
 
     public Player(String name) {
         super(name);
@@ -22,6 +24,14 @@ public class Player extends Participant{
 
     public void addDeath() {
         this.deaths++;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
     @Override
