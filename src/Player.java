@@ -1,5 +1,4 @@
-// src/Player.java
-public class Player extends Participant {
+public class Player extends Participant{
     private int kills;
     private int deaths;
     private Team team;

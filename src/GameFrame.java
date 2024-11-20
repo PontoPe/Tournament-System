@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.PrintStream;
 
 public class GameFrame extends JFrame {
     private Game game;
