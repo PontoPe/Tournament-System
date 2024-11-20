@@ -1,6 +1,8 @@
 # 🏆 **Sistema de Torneio de CS2/Valorant** 🎮
 
-Bem-vindo ao sistema de torneio para CS2/Valorant! Este projeto foi criado para facilitar a organização e gerenciamento de torneios competitivos, proporcionando uma interface intuitiva tanto para os organizadores quanto para os participantes.
+Bem-vindo ao sistema de torneio para CS2/Valorant! Agora com GUI! 
+Este projeto foi criado para facilitar a organização e gerenciamento de torneios competitivos, proporcionando uma interface intuitiva tanto para os organizadores quanto para os participantes.
+Por enquanto, só apresenta a fase de grupos, mas pretendo adicionar mais!
 
 ## 📋 **Sumário**
 
